@@ -3,7 +3,7 @@
 ## Pour installer :
 
 ```
-git clone [url du git]
+git clone https://github.com/Adams4422/Stage.git
 ```
 ```
 rm -r node_modules
