@@ -13,7 +13,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Map/>
+        <div id="map">
+          <Map/>
+        </div>
+        <div id="console">
+        </div>
       </div>
     );
   }
