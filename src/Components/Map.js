@@ -14,6 +14,7 @@ class Map extends Component{
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/light-v9',
+      //Centrer sur Beaulieu avec bon zoom
       center: [-1.6371321999999964, 48.11573389999999],
       zoom: 15
     });
