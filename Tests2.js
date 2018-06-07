@@ -1,5 +1,4 @@
-var sleep = require('sleep');
-while(true){
-  console.log(1)
-  sleep.sleep(1)
-}
+
+setInterval(function(){
+  console.log('bobi')
+}, 1000)

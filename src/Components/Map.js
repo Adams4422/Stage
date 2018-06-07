@@ -39,7 +39,21 @@ class Map extends Component{
           title: 'Accueil',
           description: 'Accès : Barrière personnel faculté',
           id: '',
-          statut: ''
+          status: ''
+        }
+      },
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [-1.6386111111111 , 48.1161111]
+        },
+        properties: {
+          title: 'SAVE',
+          placenumber : 1,
+          description: 'Test',
+          id: '70b3d53af0031139',
+          status: ''
         }
       },
       {
@@ -53,7 +67,7 @@ class Map extends Component{
           placenumber : 2,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -67,7 +81,7 @@ class Map extends Component{
           placenumber : 1,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -81,7 +95,7 @@ class Map extends Component{
           placenumber : 2,
           description: 'place 1/2',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -95,7 +109,7 @@ class Map extends Component{
           placenumber : 2,
           description: 'place 2/2',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -109,7 +123,7 @@ class Map extends Component{
           placenumber : 1,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -123,7 +137,7 @@ class Map extends Component{
           placenumber : 2,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -137,7 +151,7 @@ class Map extends Component{
           placenumber : 2,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -151,7 +165,7 @@ class Map extends Component{
           placenumber : 2,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -165,7 +179,7 @@ class Map extends Component{
           placenumber : 2,
           description: 'Service santé des étudiants',
           id: '',
-          statut: ''
+          status: ''
 
         }
       },
@@ -180,7 +194,7 @@ class Map extends Component{
           placenumber : 3,
           description: 'Pôle handicap',
           id: '',
-          statut: ''
+          status: ''
         }
       },
       {
@@ -194,12 +208,32 @@ class Map extends Component{
           placenumber : 1,
           description: '',
           id: '',
-          statut: ''
+          status: ''
         }
 
       }]
     };
 
+    setInterval(function(){
+      var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+      var req = new XMLHttpRequest();
+      //Requête HTTP
+      req.open("GET", "http://primary.aqmo.org/API/sensorsData.php");
+      req.addEventListener("load", function(){
+        if (req.status >= 200 && req.status < 400) {
+            //On met à jour notre tableau
+            const data = JSON.parse(req.responseText);
+            majSensors(geojson, data);
+        }else {
+          console.error(req.status + " " + req.statusText);
+        }
+
+      });
+      req.addEventListener("error", function () {
+          console.error("Erreur réseau");
+      });
+      req.send(null);
+    }, 10000);
 
 
   // add markers to map
@@ -235,6 +269,31 @@ class Map extends Component{
       </div>
     );
   }
+
+}
+
+
+
+var majSensors = function(sensors, datas) {
+  //On parcourt la liste des sensorsData
+  sensors.features.forEach((sensor)=>{
+    const id = sensor.properties.id;
+    if(id!==''){
+      console.log(`Id du sensor qu'on mets à jour : ${sensor.properties.id}`);
+      //On va chercher les informations qu'on a dans la requête. On cherche un status 0/1/2/3/4/5/F. On ne regarde pas les "" ou n.a
+      const newStatus = datas.status.find((status, indice) => {
+        return ( (datas.sensorInstallId[indice]==id) && ((new Date(datas.timestamp[indice]) - new Date())/3600000 < 24) && (["0","1","2","3","4","5","F"].includes(status)) );
+      });
+      console.log("new status : "+newStatus)
+      //Si newStatus est "undefined" alors on n'a rien trouvé donc on ne mets pas à jour
+      if(newStatus!== undefined){
+        sensor.properties.status = newStatus;
+      }else{
+        sensor.properties.status = "n.a";
+      }
+    }
+  });
+  // console.log(sensors);
 
 }
 

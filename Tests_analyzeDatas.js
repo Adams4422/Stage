@@ -1,24 +1,28 @@
 var sensors = [];
 sensors.push({coordonnees : {lon: -1.6386111111111, lat: 48.1161111 }, id: "70b3d53af0031139", status: "n.a"});
 
-//Requête HTTP
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var req = new XMLHttpRequest();
-req.open("GET", "http://primary.aqmo.org/API/sensorsData.php");
-req.addEventListener("load", function(){
-  if (req.status >= 200 && req.status < 400) {
-      //On met à jour notre tableau
-      data = JSON.parse(req.responseText);
-      majSensors(sensors, data);
-  }else {
-    console.error(req.status + " " + req.statusText);
-  }
+setInterval(function(){
+  var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+  var req = new XMLHttpRequest();
+  //Requête HTTP
+  req.open("GET", "http://primary.aqmo.org/API/sensorsData.php");
+  req.addEventListener("load", function(){
+    if (req.status >= 200 && req.status < 400) {
+        //On met à jour notre tableau
+        data = JSON.parse(req.responseText);
+        majSensors(sensors, data);
+    }else {
+      console.error(req.status + " " + req.statusText);
+    }
 
-});
-req.addEventListener("error", function () {
-    console.error("Erreur réseau");
-});
-req.send(null);
+  });
+  req.addEventListener("error", function () {
+      console.error("Erreur réseau");
+  });
+  req.send(null);
+}, 10000)
+
+
 
 var majSensors = function(sensors, datas) {
   //On parcourt la liste des sensorsData
@@ -32,6 +36,8 @@ var majSensors = function(sensors, datas) {
     //Si newStatus est "undefined" alors on n'a rien trouvé donc on ne mets pas à jour
     if(newStatus!== undefined){
       sensor.status = newStatus;
+    }else{
+      sensor.status = "n.a";
     }
 
   });
