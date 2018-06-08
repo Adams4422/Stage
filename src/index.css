@@ -37,13 +37,24 @@ h2 {
   cursor: pointer;
 }
 
+/*.iframe {
+  width: 450px;
+  height:450px;
+  display: "initial";
+  position: "relative";
+}*/
+
 .mapboxgl-popup {
-  max-width: 200px;
+  max-width: 250px;
+  /*width: 450px;
+  height:450px;*/
 }
 
 .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+/*  display: "initial";
+  position: "relative";*/
 }
 
 .session {
