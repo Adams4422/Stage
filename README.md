@@ -1,5 +1,12 @@
 # StageProject
 
+## Si git deconne quand tu veux pull (probleme de merge et que permission denied sur un file) :
+
+-Ferme tous les fichiers/éditeurs de textes qui peuvent être en train d'utiliser le file en question (ferme Atom, stop le npm start..)
+-Recommence
+
+Il semble que ce soit un problème de windows qui ne t'autorises pas à faire ces changements si tu as ça d'ouvert quelque part. Du coup ça va te lancer le merge et tu vas pouvoir modifier en ouvrant à nouveau atom, et ensuite push. 
+
 ## Pour push une mise à jour : 
 
 ```
