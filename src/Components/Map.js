@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import erreur from '../img/erreur.jpg';
+import busy from '../img/erreur.jpg';
 import handicap from '../img/Handicap.png';
 import Iframe from 'react-iframe';
+import available from '../img/hand_vert.png';
+import noinformation from '../img/NA.jpg';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+
 
 
 
@@ -19,8 +22,8 @@ var geojson = {
             properties: {
               title: 'Accueil',
               description: 'Accès : Barrière personnel faculté',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -30,11 +33,11 @@ var geojson = {
               coordinates: [-1.6386111111111 , 48.1161111]
             },
             properties: {
-              title: 'Captor1',
-              placenumber : 1,
+              title: 'IRISA Test',
+              placenumber : 2,
               description: 'Test',
-              id: '70b3d53af0031139',
-              status: ''
+              id: ['70b3d53af0031139', '70b3d53af0031137'],
+              status: []
             }
           },
           {
@@ -47,8 +50,8 @@ var geojson = {
               title: 'GEA',
               placenumber : 2,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -61,8 +64,8 @@ var geojson = {
               title: 'Institut des Sciences Chimiques de Rennes',
               placenumber : 1,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -75,8 +78,8 @@ var geojson = {
               title: 'Inria',
               placenumber : 2,
               description: 'INRIA',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -89,8 +92,8 @@ var geojson = {
               title: 'Institut des Sciences Chimiques de Rennes',
               placenumber : 1,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -103,8 +106,8 @@ var geojson = {
               title: 'PNRB',
               placenumber : 2,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -117,8 +120,8 @@ var geojson = {
               title: 'IETR',
               placenumber : 2,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -131,8 +134,8 @@ var geojson = {
               title: 'Pôle de mécanique et technologie',
               placenumber : 2,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -145,8 +148,8 @@ var geojson = {
               title: 'SIMPPS',
               placenumber : 2,
               description: 'Service santé des étudiants',
-              id: '',
-              status: ''
+              id: [],
+              status: []
 
             }
           },
@@ -160,8 +163,8 @@ var geojson = {
               title: 'SAVE',
               placenumber : 3,
               description: 'Pôle handicap',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
           },
           {
@@ -174,8 +177,8 @@ var geojson = {
               title: 'Bâtiment 11B',
               placenumber : 1,
               description: '',
-              id: '',
-              status: ''
+              id: [],
+              status: []
             }
 
           }]
@@ -219,10 +222,13 @@ class Map extends Component{
               // create a HTML element for each feature
               var el = document.createElement('img');
               el.className = 'marker';
-              if(marker.properties.status == "1"){
-                el.src = erreur;
+              //Update the picture depending on the avaibility
+              if(marker.properties.status.includes("0")){
+                el.src = available;
+              }else if(marker.properties.status.includes("n.a")||marker.properties.status.includes("")||(marker.properties.status.length == 0)){
+                el.src = noinformation;
               }else{
-                el.src = handicap;
+                el.src = busy;
               }
 
               // make a marker for each feature and add to the map
@@ -267,25 +273,25 @@ class Map extends Component{
 
 /* Update the geojson file with datas from the sensors */
 var majSensors = function(datas) {
-    //On parcourt la liste des sensorsData
-    geojson.features.forEach((sensor)=>{
-      const id = sensor.properties.id;
-      if(id!==''){
-        console.log(`Id du sensor qu'on mets à jour : ${sensor.properties.id}`);
-        //On va chercher les informations qu'on a dans la requête. On cherche un status 0/1/2/3/4/5/F. On ne regarde pas les "" ou n.a
-        const newStatus = datas.status.find((status, indice) => {
-          return ( (datas.sensorInstallId[indice]==id) && ((new Date(datas.timestamp[indice]) - new Date())/3600000 < 24) && (["0","1","2","3","4","5","F"].includes(status)) );
-        });
-        console.log("new status : "+newStatus)
-        //Si newStatus est "undefined" alors on n'a rien trouvé donc on ne mets pas à jour
-        if(newStatus!== undefined){
-          sensor.properties.status = newStatus;
-          sensor.properties.description = newStatus;
-          console.log("Description"+ sensor.properties.description)
-        }else{
-          sensor.properties.status = "n.a";
+    //On parcourt la liste des sensors
+    geojson.features.forEach((marker)=>{
+      marker.properties.id.forEach((id, index)=>{
+        //Si l'id a été renseigné
+        if(id!==''){
+          console.log(`Id du sensor qu'on mets à jour : ${id}`);
+          //On va chercher les informations qu'on a dans la requête. On cherche un status 0/1/2/3/4/5/F. On ne regarde pas les "" ou n.a
+          const newStatus = datas.status.find((status, indice) => {
+            return ( (datas.sensorInstallId[indice]==id) && ((new Date(datas.timestamp[indice]) - new Date())/3600000 < 24) && (["0","1","2","3","4","5","F"].includes(status)) );
+          });
+          console.log("new status : "+newStatus)
+          //Si newStatus est "undefined" alors on n'a rien trouvé donc on met "n.a"
+          if(newStatus!== undefined){
+            marker.properties.status[index] = newStatus;
+          }else{
+            marker.properties.status[index] = "n.a";
+          }
         }
-      }
+      });
     });
 
   }
