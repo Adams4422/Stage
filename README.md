@@ -1,5 +1,29 @@
 # StageProject
 
+## Pour push une mise à jour : 
+
+```
+git add "*"
+```
+
+```
+git commit -m "Un message..."
+```
+
+```
+git push
+```
+## Pour récupérer la dernière version : 
+
+Permet de vérifier si on a la dernière version :
+```
+git checkout
+```
+Récupère les derniers fichiers
+```
+git pull
+```
+
 ## Pour installer :
 
 ```
