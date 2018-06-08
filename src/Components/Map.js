@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import busy from '../img/erreur.jpg';
 import handicap from '../img/Handicap.png';
-<<<<<<< HEAD
 import Iframe from 'react-iframe';
 import available from '../img/hand_vert.png';
 import noinformation from '../img/NA.jpg';
-=======
-import iframe from 'react-iframe';
->>>>>>> 3248e8e166c978c48aec8ccbf6399f146274ceed
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 
@@ -26,14 +22,8 @@ var geojson = {
             properties: {
               title: 'Accueil',
               description: 'Accès : Barrière personnel faculté',
-<<<<<<< HEAD
               id: [],
               status: []
-=======
-              id: '',
-              status: '',
-              photo : 'url = "http://www.youtube.com/embed/xDMP3i36naA"'
->>>>>>> 3248e8e166c978c48aec8ccbf6399f146274ceed
             }
           },
           {
@@ -82,7 +72,7 @@ var geojson = {
             type: 'Feature',
             geometry: {
               type: 'Point',
-              coordinates: [-1.6399678134918076 , 48.116443008269]
+              coordinates: [-1.6480555555555556 , 48.1188889]
             },
             properties: {
               title: 'Inria',
@@ -181,7 +171,7 @@ var geojson = {
             type: 'Feature',
             geometry: {
               type: 'Point',
-              coordinates: [-1.6402413988113267 , 48.1168942610471]
+              coordinates: [-1.6480555555555556 , 48.1188889]
             },
             properties: {
               title: 'Bâtiment 11B',
@@ -190,230 +180,6 @@ var geojson = {
               id: [],
               status: []
             }
-          },
-          {
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [-1.6385184057553488 , 	48.116422923200915]
-            },
-            properties: {
-              title: 'Bâtiment 13',
-              placenumber : 1,
-              description: '',
-              id: '',
-              status: ''
-            }
-            },
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [-1.6382528670628744 ,48.11655006233119]
-                },
-                properties: {
-                  title: 'Bâtiment 13',
-                  placenumber : 1,
-                  description: '',
-                  id: '',
-                  status: ''
-                }
-              },
-                {
-                  type: 'Feature',
-                  geometry: {
-                    type: 'Point',
-                    coordinates: [-1.6366130224863582 , 48.11727412929745]
-                  },
-                  properties: {
-                    title: 'P4',
-                    placenumber : 1,
-                    description: '',
-                    id: '70b3d53af0031138',
-                    status: ''
-                  }
-                },
-                  {
-                    type: 'Feature',
-                    geometry: {
-                      type: 'Point',
-                      coordinates: [-1.63603064484073 , 48.11684054068611]
-                    },
-                    properties: {
-                      title: 'Bâtiment 5',
-                      placenumber : 1,
-                      description: '',
-                      id: '',
-                      status: ''
-                    }
-                  },
-                    {
-                      type: 'Feature',
-                      geometry: {
-                        type: 'Point',
-                        coordinates: [-1.6349678134918122 , 48.11757699817833]
-                      },
-                      properties: {
-                        title: 'Bâtiment 7',
-                        placenumber : 2,
-                        description: '',
-                        id: '',
-                        status: ''
-                      }
-                    },
-                      {
-                        type: 'Feature',
-                        geometry: {
-                          type: 'Point',
-                          coordinates: [-1.635577013227703 , 48.11798576509834]
-                        },
-                        properties: {
-                          title: 'P4',
-                          placenumber : 3,
-                          description: '',
-                          id: '',
-                          status: ''
-                        }
-                      },
-                        {
-                          type: 'Feature',
-                          geometry: {
-                            type: 'Point',
-                            coordinates: [-1.6366291157404476 , 48.11824376854161]
-                          },
-                          properties: {
-                            title: 'ESIR',
-                            placenumber : 1,
-                            description: '',
-                            id: '',
-                            status: ''
-                          }
-                        },
-                          {
-                            type: 'Feature',
-                            geometry: {
-                              type: 'Point',
-                              coordinates: [-1.6378984771833984 , 48.11804485617516]
-                            },
-                            properties: {
-                              title: 'Bâtiment 15',
-                              placenumber : 2,
-                              description: '',
-                              id: '',
-                              status: ''
-                            }
-                          },
-                            {
-                              type: 'Feature',
-                              geometry: {
-                                type: 'Point',
-                                coordinates: [-1.6411582189135743 , 48.12050904567497	]
-                              },
-                              properties: {
-                                title: 'Bâtiment 29',
-                                placenumber : 2,
-                                description: '',
-                                id: '',
-                                status: ''
-                              }
-                            },
-                              {
-                                type: 'Feature',
-                                geometry: {
-                                  type: 'Point',
-                                  coordinates: [-1.641081945101405 , 48.121033840141486]
-                                },
-                                properties: {
-                                  title: 'Bâtiment 32',
-                                  placenumber : 4,
-                                  description: '',
-                                  id: '',
-                                  status: ''
-                                }
-                              },
-                                {
-                                  type: 'Feature',
-                                  geometry: {
-                                    type: 'Point',
-                                    coordinates: [-1.6436111111111111 ,48.1202778]
-                                  },
-                                  properties: {
-                                    title: 'Bâtiment 33',
-                                    placenumber : 2,
-                                    description: '',
-                                    id: '',
-                                    status: ''
-                                  }
-                                },
-                                  {
-                                    type: 'Feature',
-                                    geometry: {
-                                      type: 'Point',
-                                      coordinates: [	-1.6427608508533922 ,	48.12043357846941]
-                                    },
-                                    properties: {
-                                      title: 'P7',
-                                      placenumber : 1,
-                                      description: '',
-                                      id: '',
-                                      status: ''
-                                    }
-                                  },
-                                    {
-                                      type: 'Feature',
-                                      geometry: {
-                                        type: 'Point',
-                                        coordinates: [-1.6450777840614137 ,	48.11959506871953]
-                                      },
-                                      properties: {
-                                        title: 'Médiathèque',
-                                        placenumber : 1,
-                                        description: '',
-                                        id: '',
-                                        status: ''
-                                      }
-                                    },
-                                      {
-                                        type: 'Feature',
-                                        geometry: {
-                                          type: 'Point',
-                                          coordinates: [-1.6424770320786592 ,	48.1198171006099]
-                                        },
-                                        properties: {
-                                          title: 'P7',
-                                          placenumber : 2,
-                                          description: '',
-                                          id: '',
-                                          status: ''
-                                        }
-                                      },
-                                        {
-                                          type: 'Feature',
-                                          geometry: {
-                                            type: 'Point',
-                                            coordinates: [-1.6420720185174105 ,	48.11963446154427]
-                                          },
-                                          properties: {
-                                            title: 'Bâtiment 23',
-                                            placenumber : 2,
-                                            description: '',
-                                            id: '',
-                                            status: ''
-                                          }
-                                        },
-                                          {
-                                            type: 'Feature',
-                                            geometry: {
-                                              type: 'Point',
-                                              coordinates: [-1.6435344990094336 ,	48.11773661510321]
-                                            },
-                                            properties: {
-                                              title: 'Diapason',
-                                              placenumber : 2,
-                                              description: '',
-                                              id: '',
-                                              status: ''
-                                            }
 
           }]
         };
@@ -469,8 +235,7 @@ class Map extends Component{
               new mapboxgl.Marker(el)
               .setLngLat(marker.geometry.coordinates)
               .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-              .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-            //  .setHTML('<iframe>' + marker.properties.photo + ' allowFullScreen </iframe>'))
+              .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p><'))
               .addTo(map);
             });
         }else {
