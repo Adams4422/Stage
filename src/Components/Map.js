@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import erreur from '../img/erreur.jpg';
 import handicap from '../img/Handicap.png';
+import Iframe from 'react-iframe';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 
@@ -29,7 +30,7 @@ var geojson = {
               coordinates: [-1.6386111111111 , 48.1161111]
             },
             properties: {
-              title: 'SAVE',
+              title: 'Captor1',
               placenumber : 1,
               description: 'Test',
               id: '70b3d53af0031139',
@@ -68,7 +69,7 @@ var geojson = {
             type: 'Feature',
             geometry: {
               type: 'Point',
-              coordinates: [-1.64 , 48.11646]
+              coordinates: [-1.6480555555555556 , 48.1188889]
             },
             properties: {
               title: 'Inria',
@@ -167,7 +168,7 @@ var geojson = {
             type: 'Feature',
             geometry: {
               type: 'Point',
-              coordinates: [-1.64 , 48.1169444]
+              coordinates: [-1.6480555555555556 , 48.1188889]
             },
             properties: {
               title: 'Bâtiment 11B',
@@ -228,7 +229,7 @@ class Map extends Component{
               new mapboxgl.Marker(el)
               .setLngLat(marker.geometry.coordinates)
               .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-              .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+              .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p><'))
               .addTo(map);
             });
         }else {
