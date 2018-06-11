@@ -45,7 +45,8 @@ h2 {
 }*/
 
 .mapboxgl-popup {
-  max-width: 250px;
+  max-width: 100%;
+  max-height: 100%;
   /*width: 450px;
   height:450px;*/
 }
