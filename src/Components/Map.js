@@ -5,7 +5,8 @@ import Iframe from 'react-iframe';
 import pano from '../img/panoTest.jpg'
 import available from '../img/hand_vert.png';
 import noinformation from '../img/NA.jpg';
-import pano2 from '../img/pano2.jpg'
+import pano2 from '../img/pano2.jpg';
+import erreur from '../img/handicap.orange.png';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 
@@ -26,7 +27,7 @@ var geojson = {
               description: 'Accès : Barrière personnel faculté',
               id: [],
               status: [],
-              image: pano2
+              image: "pano2"
             }
           },
           {
@@ -407,8 +408,24 @@ var geojson = {
                                               id: [],
                                               status: []
                                             }
+                                          },
+                                          {
+                                            type: 'Feature',
+                                            geometry: {
+                                              type: 'Point',
+                                              coordinates: [-1.63945265420341 ,	48.1158191092968]
+                                            },
+                                            properties: {
+                                              title: 'IRISA',
+                                              placenumber : 3,
+                                              description: '',
+                                              id: [],
+                                              status: [],
+                                              image : "IRISA_3"
+                                            }
+                                          }
 
-          }]
+          ]
         };
 
 class Map extends Component{
@@ -453,15 +470,18 @@ class Map extends Component{
                 el.src = available;
               }else if(marker.properties.status.includes("n.a")||marker.properties.status.includes("")||(marker.properties.status.length == 0)){
                 el.src = noinformation;
-              }else{
+              }else if(marker.properties.status.includes("1")){
                 el.src = busy;
+              }else{
+                el.src = erreur;
               }
 
               // make a marker for each feature and add to the map
               new mapboxgl.Marker(el)
               .setLngLat(marker.geometry.coordinates)
               .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-              .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p><iframe width=100% height=100% allowfullscreen frameborder="0" src="' + marker.properties.image + '" ><'))
+              .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description +
+              '</p><iframe width="100%" height="300" allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.4/pannellum.htm?panorama=https://epleanif.sirv.com/Images/'+marker.properties.image+'.jpg"></iframe><'))
               .addTo(map);
             });
         }else {
