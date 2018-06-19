@@ -104,14 +104,15 @@ var geojson = {
             type: 'Feature',
             geometry: {
               type: 'Point',
-              coordinates: [-1.6402777777777777 , 48.1147222]
+              coordinates: [-1.6402804236930706 , 48.114503988522685]
             },
             properties: {
               title: 'PNRB',
               placenumber : 2,
               description: '',
-              id: [],
-              status: []
+              id: ["70b3d53af0031136"],
+              status: [],
+              image : "PNRB"
             }
           },
           {
@@ -423,6 +424,21 @@ var geojson = {
                                               status: [],
                                               image : "IRISA_3"
                                             }
+                                          },
+                                          {
+                                            type: 'Feature',
+                                            geometry: {
+                                              type: 'Point',
+                                              coordinates: [-1.64048 ,	48.114343]
+                                            },
+                                            properties: {
+                                              title: 'PNRB',
+                                              placenumber : 1,
+                                              description: 'Demo sensor39',
+                                              id: ["70b3d53af0031139"],
+                                              status: [],
+                                              image : "PNRB"
+                                            }
                                           }
 
           ]
@@ -468,7 +484,7 @@ class Map extends Component{
               //Update the picture depending on the avaibility
               if(marker.properties.status.includes("0")){
                 el.src = available;
-              }else if(marker.properties.status.includes("n.a")||marker.properties.status.includes("")||(marker.properties.status.length == 0)){
+              }else if(marker.properties.status.includes("n.a")||marker.properties.status.includes("")||(marker.properties.status.length == 0)||(marker.properties.status.includes("2"))){
                 el.src = noinformation;
               }else if(marker.properties.status.includes("1")){
                 el.src = busy;
@@ -524,15 +540,25 @@ var majSensors = function(datas) {
       marker.properties.id.forEach((id, index)=>{
         //Si l'id a été renseigné
         if(id!==''){
+          var i=0;
           console.log(`Id du sensor qu'on mets à jour : ${id}`);
           //On va chercher les informations qu'on a dans la requête. On cherche un status 0/1/2/3/4/5/F. On ne regarde pas les "" ou n.a
           const newStatus = datas.status.find((status, indice) => {
+            i = indice;
             return ( (datas.sensorInstallId[indice]==id) && ((new Date(datas.timestamp[indice]) - new Date())/3600000 < 24) && (["0","1","2","3","4","5","F"].includes(status)) );
           });
           console.log("new status : "+newStatus)
           //Si newStatus est "undefined" alors on n'a rien trouvé donc on met "n.a"
           if(newStatus!== undefined){
-            marker.properties.status[index] = newStatus;
+            if(newStatus == "2"){
+              if(datas.parkFlag[i]=="1"){
+                marker.properties.status[index] = "1";
+              }else{
+                marker.properties.status[index] = "0";
+              }
+            }else{
+              marker.properties.status[index] = newStatus;
+            }
           }else{
             marker.properties.status[index] = "n.a";
           }
