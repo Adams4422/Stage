@@ -7,6 +7,7 @@ import available from '../img/hand_vert.png';
 import noinformation from '../img/NA.jpg';
 import pano2 from '../img/pano2.jpg';
 import erreur from '../img/handicap.orange.png';
+import style from '../style.json';
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 
@@ -459,7 +460,8 @@ class Map extends Component{
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v10',
+      style: style,
+      //style: 'mapbox://styles/mapbox/streets-v10',
       center: Beaulieu,
       maxBounds: BeaulieuBounds,
       doubleClickZoom: true,
